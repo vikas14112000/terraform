@@ -1,3 +1,4 @@
+
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
   tags = {
@@ -103,7 +104,7 @@ resource "aws_security_group" "ec2_sg" {
 resource "aws_instance" "main_1" {
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.public_1.id
-  security_groups = [aws_security_group.ec2_sg.id]
+  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   ami           = "ami-02b8269d5e85954ef"
   associate_public_ip_address = true
   tags = {
@@ -124,7 +125,7 @@ EOF
 resource "aws_instance" "main_2" {
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.public_2.id
-  security_groups = [aws_security_group.ec2_sg.id]
+  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   ami           = "ami-02b8269d5e85954ef"
   associate_public_ip_address = true
   tags = {
